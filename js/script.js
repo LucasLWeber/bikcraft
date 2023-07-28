@@ -11,7 +11,6 @@ function ativarLink(link) {
 links.forEach(ativarLink);
 
 // Ativar itens orcamento
-
 const parametros = new URLSearchParams(location.search);
 
 function ativarProduto(parametro) {
@@ -20,5 +19,20 @@ function ativarProduto(parametro) {
     elemento.checked = true;
   }
 }
-
 parametros.forEach(ativarProduto);
+
+// Perguntas Frequentes
+const perguntas = document.querySelectorAll(".perguntas button");
+
+function ativarPergunta(event) {
+  const pergunta = event.currentTarget;
+  const controls = pergunta.getAttribute("aria-controls");
+  const resposta = document.getElementById(controls);
+  resposta.classList.toggle("ativa");
+  pergunta.setAttribute("aria-expanded", resposta.classList.contains("ativa"));
+}
+
+function eventosPerguntas(pergunta) {
+  pergunta.addEventListener("click", ativarPergunta);
+}
+perguntas.forEach(eventosPerguntas);
